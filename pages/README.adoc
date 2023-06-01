@@ -17,7 +17,6 @@ endif::[]
 = Doc as Test workshop
 
 
-// QR code generate by https://www.adobe.com/fr/express/feature/image/qr-code-generator
 image:qr_code_workshop.svg[link="qr_code_workshop.{page_extension}", width=100px]
 
 == Introduction

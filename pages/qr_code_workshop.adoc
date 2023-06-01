@@ -2,8 +2,10 @@
 
 = DocAsTest Workshop
 
+
+// QR code generate by https://www.adobe.com/fr/express/feature/image/qr-code-generator
 image::qr_code_workshop.svg[width=45%,align="center"]
-[very_big]#https://sfauvel.github.io/doc_as_test_workshop[]#
+[very_big]#https://docastest.github.io/doc_as_test_workshop[]#
 
 ++++
 <style>
