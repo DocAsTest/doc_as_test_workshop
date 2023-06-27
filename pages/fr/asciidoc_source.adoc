@@ -1,0 +1,17 @@
+
+ifndef::htmlformat[]
+:page_extension: adoc
+endif::[]
+
+ifdef::htmlformat[]
+:page_extension: html
+endif::[]
+
+= Sources Asciidoc
+
+Vous pouvez voir le rendu du code asciidoc ci-dessous sur la page link:asciidoc.{page_extension}[]
+
+.Code source en Asciidoc
+------
+include::asciidoc.adoc[]
+------

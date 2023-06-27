@@ -1,0 +1,118 @@
+= Asciidoc to HTML
+
+
+== Docker
+
+https://hub.docker.com/r/asciidoctor/docker-asciidoctor/[]
+
+.How to use it
+----
+docker run -it -v <your directory>:/documents/ asciidoctor/docker-asciidoctor
+asciidoctor sample.adoc
+----
+
+== Asciidoctorj
+
+https://github.com/asciidoctor/asciidoctorj[]
+
+.How to use it
+----
+Linux: asciidoctorj-2.5.7/bin/asciidoctorj README.adoc
+Windows: asciidoctorj-2.5.7\bin\asciidoctorj.bat README.adoc
+----
+
+== Maven
+
+https://sfauvel.github.io/documentationtesting/documentationtesting/org/sfvl/howto/Tutorial.html#_convert_to_html[]
+
+== IDE
+
+* Intellij
+** Got to the asciidoc file
+** Click on `HTML`
+* VSCode
+** Open command palette (CTRL + SHIFT + 'P') and select `Asciidoc: Save HTML Document` (CTRL + ALT + 'S')
+
+== Github
+
+We will using the https://github.com/manoelcampos/asciidoctor-ghpages-action[asciidoctor-ghpages-action] github action.
+
+=== Configure Github
+
+// tag::github-configure[]
+The action we use creates a branch so, it needs to have write access on repository.
+
+====
+Go to `Settings > Actions > General > Workflow permissions` and allow workflows to write into the repository.
+
+* [x] Workflows have read and write permissions in the repository for all scopes.
+* [ ] Workflows have read permissions in the repository for the contents and packages scopes only.
+====
+// end::github-configure[]
+
+=== Create the action
+
+// tag::github-create-action[]
+We will add an action that creates HTML files from asciidoc files and commit them in a `gh-pages` branch.
+
+If you cloned the https://github.com/sfauvel/Parrot-Refactoring-Kata[] repository, 
+you find the `.github/workflows/publish_site.yaml` file that configure the action to publish your site.
+You just need to configure the path to your documentation folder.
+We suggest you put it in a "docs" directory in your test directory.
+You must have a `README.adoc` file in this folder. 
+It'll become the `index.html` of you site.
+
+If you use your own project, create the `publish_site.yaml` file with the following code and configure correctly the source dir :
+
+.Publish action
+====
+[source,yaml]
+----
+name: GitHub Pages Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      
+    # Includes the AsciiDoctor GitHub Pages Action to convert adoc files to html and publish to gh-pages branch
+    # from https://github.com/manoelcampos/asciidoctor-ghpages-action
+    - name: asciidoctor-ghpages
+      uses: manoelcampos/asciidoctor-ghpages-action@v2
+      with:
+        pdf_build: true
+        asciidoctor_params: --attribute=htmlformat
+        #asciidoctor_params: --attribute=nofooter --attribute=htmlformat
+        # adoc_file_ext: .ascii # default is .adoc
+        source_dir: pages/ # default is .
+        # slides_build: true
+        # pre_build: python pre_build.py
+        # post_build:
+----
+====
+// end::github-create-action[]
+
+=== Publish the site
+
+// tag::github-publish[]
+Once the branch is created, we can publish its content. 
+For that, got to: `Settings > Pages > Branch`
+and select `gh-pages`.
+
+Your page is then visible at `https://[github account].github.io/[repository]/`.
+
+Example: https://sfauvel.github.io/doc_as_test_workshop/
+
+It will be updated on each commit on your `main` branch. 
+It usually takes 1mn before you can see the result in your public site. 
+// end::github-publish[]

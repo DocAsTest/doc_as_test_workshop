@@ -1,0 +1,23 @@
+
+
+= DocAsTest Workshop
+
+
+// QR code generate by https://www.adobe.com/fr/express/feature/image/qr-code-generator
+image::qr_code_workshop_fr.svg[width=45%,align="center"]
+[very_big]#https://docastest.github.io/doc_as_test_workshop/fr[]#
+
+++++
+<style>
+#content {
+    max-width: 70%;
+    text-align:center;
+}
+.very_big {
+    font-size: 3em;
+}
+#footer {
+    visibility: hidden;
+}
+</style>
+++++

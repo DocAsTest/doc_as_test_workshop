@@ -1,0 +1,86 @@
+
+ifndef::htmlformat[]
+:page_extension: adoc
+endif::[]
+
+ifdef::htmlformat[]
+:page_extension: html
+endif::[]
+
+= Asciidoc
+
+You can see the source code used to display this page here link:asciidoc_source.{page_extension}[Asciidoc source]
+
+We use the `asciidoc` format to write our documentation.
+
+This section helps you to familiarize with this format. We explain some useful syntax in our context.
+
+If you want to go further, you can see: 
+https://docs.asciidoctor.org/asciidoctor/latest/[]
+
+https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[]
+
+
+You can write in *bold* or _italic_.
+
+---
+
+* Create
+* a
+* checklist
+
+---
+
+[%autowidth]
+|====
+| Table | Header
+
+| Line 1 | Value
+| Line 2 | Value
+|====
+
+---
+
+include::text.adoc[]
+
+---
+
+Include special characters: &#x21E6; &#x21E7; &#x21E8; &#x21E9; 
+
+---
+
+image:asciidoctor-logo.svg[width=100px]
+
+---
+
+[source, java]
+----
+/**
+* Code avec highlighter.
+*/
+public class OperationsTest {
+    @Test
+    public void calculate_the_square_of_a_number() {
+        assertEquals(42, Math.max(42, 35));
+    }
+}
+----
+
+___
+
+++++
+<svg width=300 height=100  style="background-color:#b8d6ea">
+    <rect x="40" y="10" width="40" height="40" fill="green"></rect>
+    
+    <text x="45" y="25">Text</text>
+
+    <circle cx="80" cy="60" r="20" fill="red"></circle>
+
+    <polyline style="stroke:blue;fill:none;stroke-width:3" points="
+        20,50
+        80,60
+        100,45
+        120,55
+    "/>
+</svg>
+++++

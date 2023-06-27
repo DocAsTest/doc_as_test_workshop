@@ -139,7 +139,7 @@ Instead of creating this documentation from a program, we are going to use our t
 
 
 * Use a test to generate a file (with 'adoc' extension) containing information from the execution of the application code.
-If you use the Parrot kata with Java, Javascript or Python, there is already a test that generate a file. 
+If you use the Parrot kata with Java, Javascript, Typescript or Python, there is already a test that generate a file. 
 The tests will fail but we will see how to make them passed 
 in the next chapter.
 
