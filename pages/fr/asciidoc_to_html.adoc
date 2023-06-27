@@ -1,11 +1,11 @@
-= Asciidoc to HTML
+= Asciidoc vers HTML
 
 
 == Docker
 
 https://hub.docker.com/r/asciidoctor/docker-asciidoctor/[]
 
-.How to use it
+.Comment utiliser l'image Docker
 ----
 docker run -it -v <your directory>:/documents/ asciidoctor/docker-asciidoctor
 asciidoctor sample.adoc
@@ -15,7 +15,7 @@ asciidoctor sample.adoc
 
 https://github.com/asciidoctor/asciidoctorj[]
 
-.How to use it
+.Comment utiliser asciidoctorj
 ----
 Linux: asciidoctorj-2.5.7/bin/asciidoctorj README.adoc
 Windows: asciidoctorj-2.5.7\bin\asciidoctorj.bat README.adoc
@@ -28,41 +28,43 @@ https://sfauvel.github.io/documentationtesting/documentationtesting/org/sfvl/how
 == IDE
 
 * Intellij
-** Got to the asciidoc file
-** Click on `HTML`
+** Allez sur la fichier asciidoc.
+** Cliquez sur `HTML`
 * VSCode
-** Open command palette (CTRL + SHIFT + 'P') and select `Asciidoc: Save HTML Document` (CTRL + ALT + 'S')
+** Ouvrez la palette de commandes (CTRL + SHIFT + 'P') et choisissez `Asciidoc: Save HTML Document` (CTRL + ALT + 'S')
 
 == Github
 
-We will using the https://github.com/manoelcampos/asciidoctor-ghpages-action[asciidoctor-ghpages-action] github action.
+Nous utilisons l'action Github https://github.com/manoelcampos/asciidoctor-ghpages-action[asciidoctor-ghpages-action].
 
-=== Configure Github
+=== Configurer Github
 
 // tag::github-configure[]
-The action we use creates a branch so, it needs to have write access on repository.
+L'action que nous utilisons va créer une branche.
+Il est donc nécessaire de lui donner des droits d'écriture sur le dépot.
 
 ====
-Go to `Settings > Actions > General > Workflow permissions` and allow workflows to write into the repository.
+Allez dans `Settings > Actions > General > Workflow permissions` et autorisez les workflows à écrire sur le dépot.
 
 * [x] Workflows have read and write permissions in the repository for all scopes.
 * [ ] Workflows have read permissions in the repository for the contents and packages scopes only.
 ====
 // end::github-configure[]
 
-=== Create the action
+=== Créer l'action
 
 // tag::github-create-action[]
-We will add an action that creates HTML files from asciidoc files and commit them in a `gh-pages` branch.
+Nous allons ajouter une action qui créé les fichiers HTML à partir des fichier asciidoc.
+Ils seront alors commités dans la branche `gh-pages`.
 
-If you cloned the https://github.com/sfauvel/Parrot-Refactoring-Kata[] repository, 
-you find the `.github/workflows/publish_site.yaml` file that configure the action to publish your site.
-You just need to configure the path to your documentation folder.
-We suggest you put it in a "docs" directory in your test directory.
-You must have a `README.adoc` file in this folder. 
-It'll become the `index.html` of you site.
+Si vous clonez le dépot https://github.com/sfauvel/Parrot-Refactoring-Kata[], 
+vous trouverez le fichier `.github/workflows/publish_site.yaml` qui configure l'action pour publier le site.
+Vous aurez juste à configurer le chemin vers le répertoire où se trouve votre documentation.
+Nous vous suggérons de la mettre dans un répertoire `docs`.
+Vous devez avoir un fichier `README.adoc` dans le répertoire.
+Il deviendra le fichier `index.html` de votre site.
 
-If you use your own project, create the `publish_site.yaml` file with the following code and configure correctly the source dir :
+Si vous utilisez votre propre projet, créez, dans le répertoire `.github/workflows`, le fichier `publish_site.yaml` avec le code suivant et configurez correctement le répertoire de sources.
 
 .Publish action
 ====
@@ -105,14 +107,14 @@ jobs:
 === Publish the site
 
 // tag::github-publish[]
-Once the branch is created, we can publish its content. 
-For that, got to: `Settings > Pages > Branch`
-and select `gh-pages`.
+Une fois la branche créée, nous pouvons publier son contenu.
+Pour cela, allez dans : `Settings > Pages > Branch`
+et choisissez `gh-pages`.
 
-Your page is then visible at `https://[github account].github.io/[repository]/`.
+Votre page sera alors visible depuis l'URL: `https://[github account].github.io/[repository]/`.
 
-Example: https://sfauvel.github.io/doc_as_test_workshop/
+Exemple: https://sfauvel.github.io/doc_as_test_workshop/
 
-It will be updated on each commit on your `main` branch. 
-It usually takes 1mn before you can see the result in your public site. 
+Le site sera mis à jour à chaque commit sur votre branche `main`. 
+Cela prend généralement 1mn avant de pouvoir consulter le résultat sur votre site publique.
 // end::github-publish[]

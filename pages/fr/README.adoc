@@ -28,33 +28,34 @@ image:qr_code_workshop_fr.svg[link="qr_code_workshop.{page_extension}", width=10
 
 
 
-Cet atelier vise à expérimenter l'approche {doc_as_test}.
+Cet atelier vise à *expérimenter l'approche {doc_as_test}*.
 Vous pouvez trouver des informations et des ressources sur ce concept sur le site {doc_as_test}.
 
-En bref, chaque méthode de test génère un paragraphe décrivant un comportement.
+En bref, *chaque méthode de test génère un paragraphe décrivant un comportement*.
 L'agrégation de tous ces paragraphes constitue une documentation complète du produit.
-Tant que le texte généré est le même, le test est réussi.
-Sinon, quelque chose a changé et doit être vérifié.
+*Le test passe si le texte produit est identique au dernier* qui a été validé. 
+Dans le cas contraire, un comportement a changé et le test échoue. 
+Il faut alors soit corriger le code (_régression_), soit valider le nouveau texte (_évolution_).
 
-Dans cet atelier, nous travaillerons sur un projet que nous testerons et documenterons.
-Vous pouvez utiliser n'importe lequel de vos projets pour cet atelier.
-Le plus important est d'être à l'aise avec votre environnement de développement.
-Les contraintes sont que vous devez être en mesure d'exécuter des tests sur ce projet et vous devez être en mesure d'écrire un fichier sur votre disque à partir d'eux.
-Il pourrait également être intéressant (mais pas nécessairement) de pouvoir le pousser dans un référentiel github public pour publier la documentation finale et la partager avec d'autres participants.
+Dans cet atelier, nous allons documenter un projet et par la même occasion le tester.
+Vous pouvez utiliser *n'importe lequel de vos projets* pour cet atelier.
+Le plus important, c'est d'*être à l'aise avec votre environnement de développement* pour vous concentrer sur la démarche.
+Vous devez juste être en mesure d'exécuter des tests sur ce projet et vous devez pouvoir écrire un fichier sur votre disque à partir de ceux çi.
+Il pourrait également être intéressant (mais pas nécessairement) de pouvoir le pousser dans un dépôt Github public pour publier la documentation finale et la partager avec les autres participants.
 
 Si vous n'avez pas de projet, vous pouvez cloner ce dépôt : link:https://github.com/sfauvel/Parrot-Refactoring-Kata[]. 
-Il s'agit d'un clone de celui du référentiel https://github.com/emilybache[Emily Bache].
+Il s'agit d'un clone du kata présent sur le Github d'https://github.com/emilybache[Emily Bache].
 
-Ce kata est disponible dans de nombreuses langues, vous trouverez donc probablement votre préféré. 
-Nous avons configuré le projet java avec un outillage avancé. 
-Les projets python et javascript sont également configurés pour démarrer rapidement.
+Ce kata est disponible dans de nombreux langages, vous trouverez donc probablement votre préféré. 
+Nous avons configuré le projet java avec un outillage assez compet. 
+Les projets python, javascript et typescript sont également configurés pour démarrer rapidement.
 
 
 == Outillage
 
 ====
 Nous allons tout d'abord préparer l'environnement nécessaire à la mise en place d'une approche {doc_as_test}.
-Pour cela nous verrons les base de la syntaxe `{asciidoc}`, le langage de markup qui nous servira à produire les documents, 
+Pour cela nous verrons les base de la syntaxe `{asciidoc}`, le langage de markup qui nous servira à produire les documents
 que nous consulterons à travers un `visualiseur`.
 Nous mettrons ensuite en place les outils pour assurer la validation du contenu de la documentation.  
 ====
@@ -64,7 +65,7 @@ Nous mettrons ensuite en place les outils pour assurer la validation du contenu 
 
 
 Installez un viewer `{asciidoc}` pour visualiser le rendu des fichiers asciidoc sur lesquels nous allons travailler.
-Préférez une installation sur votre IDE pour visulaiser le résultat lors du développement.
+Préférez une installation sur votre IDE pour visualiser le résultat lors du développement.
 
 
 [%collapsible]
@@ -83,10 +84,10 @@ Préférez une installation sur votre IDE pour visulaiser le résultat lors du d
 === Créer un document
 
 Nous allons écrire notre premier fichier en `{asciidoc}`.
-Pour cela, on va créer un fichier `workshop.adoc`. 
-L'extension `adoc` est utilisée pour les fichiers au format `{asciidoc}`.
+Pour cela, créez un fichier `workshop.adoc`. 
+L'extension `.adoc` est utilisée pour les fichiers au format `{asciidoc}`.
 
-On va y décire l'atelier dans lequel nous sommes en y mettant les informations suivantes:
+Décrivez y l'atelier dans lequel nous sommes avec quelques informations telles que:
 
 * Un titre
 * Une petite description de ce que vous attendez de cet atelier.
@@ -95,7 +96,7 @@ On va y décire l'atelier dans lequel nous sommes en y mettant les informations 
 
 N'hésitez pas à mettre en forme le texte pour obtenir un rendu agréable.
 
-Vous trouverez des exemples basiques sur la link:asciidoc.{page_extension}[page d'exemple] ou , de manière plus complète, sur la page link:https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[syntax-quick-reference] du site `{asciidoc}`.
+Vous trouverez des exemples des syntaxes de base sur la link:asciidoc.{page_extension}[page d'exemple] ou , de manière plus complète, sur la page link:https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[syntax-quick-reference] du site `{asciidoc}`.
 
 
 === Publier un site
@@ -119,10 +120,10 @@ Vous pouvez également consulter la page link:asciidoc_to_html.{page_extension}[
 === Outillage pour {doc_as_test}
 
 ====
-L'objectif est ici est de valider que la documentation est cohérente avec le comportement de l'application.
+L'objectif est de valider que la documentation est cohérente avec le comportement de l'application.
 Pour cela, nous allons nous appuyer sur notre framework de test habituel.
-Chaque test génerera le contenu d'un chapitre et vérifiera qu'il produit le même contenu que la version validée de celui çi.
-C'est une combinaison des techniques de `Living documentation` de `Golden Master`.
+Chaque test génerera le contenu d'un chapitre et vérifiera qu'il est identique à la précédente version qui a été validée.
+C'est une combinaison des techniques de `Living documentation` et de `Golden Master`.
 ====
 
 // === Living documentation
@@ -144,37 +145,38 @@ C'est une combinaison des techniques de `Living documentation` de `Golden Master
 
 
 Il y a plusieurs manières de configurer l'outillage minimal nécessaire à cet atelier. 
-Choisissez-en une rapide à mettre en place en fonction de votre contexte.
+Choisissez-en une rapide à mettre en place pour vous concentrer sur l'expérimentation de la méthode quitte à avoir un outillage rudimentaire dans un premier temps.
 
-* *<<_approvals>>*: Le plus simple si vous utilisez le kata en Java, Javascript, Typescript ou Python car tout est *déjà configuré*.
+* *<<_approvals>>*: Le plus simple si vous utilisez le kata en Java, Javascript, Typescript ou Python car *tout est déjà configuré*.
 
 * *<<_méthode_de_validation>>*: Ecrire une méthode de vérification à appeler à la fin de vos tests. Cela ne nécessite qu'un *petit développement simple pour obtenir un outillage pleinement utilsable*.
-* *<<_script_bash_et_git>>*: Vous n'avez qu'à générer, depuis vos tests, votre document dans votre repo Git et un script bash fourni fera la reste. C'est *très simple mais la validation est faite par le script et non par vos tests*.wlwl. 
+* *<<_script_bash_et_git>>*: Vous n'avez qu'à générer, depuis vos tests, votre document dans votre repo Git et un script bash fourni fera la reste. C'est *très simple mais la validation est faite par le script et non par vos tests* et donc moins intégré à votre environnement de développement.
 
 
 ==== Approvals
 
-Vous pouvez utiliser la librairie https://approvaltests.com/[Approvals] qui est faite pour ça et qui est disponible pour plusieurs languages.
+Vous pouvez utiliser la librairie https://approvaltests.com/[Approvals] qui est faite pour valider des contenus par rapport à une version de référence et qui est disponible dans plusieurs langages.
 
 [NOTE]
 ====
-Dans le kata `Parrot`, nous avons configuré cette bibliothèque pour les projets Java, Javascript, Typescript et Python.
+Dans le kata `Parrot`, nous avons configuré cette bibliothèque pour les projets Java, Javascript, Typescript et Python, ce qui vous permet de démarrer rapidement.
 ====
 
-Si vous devez le configurer pour votre projet ou pour d'autres langages, vous devez spécifier que vous souhaitez générer des fichiers de sortie avec une extension `.adoc` et non `.txt`.
+Si vous devez l'utiliser sur votre projet ou pour d'autres langages que ceux préconfiguré, vous devrez le type d'extension des fichiers de sortie pour produire des `.adoc` et non des `.txt`.
 Cela peut être un peu fastidieux et dans ce cas, il est préférable, pour cet atelier, d'utiliser l'une des deux autres façons de faire que nous vous présentons ensuite
 
-`Approvals` utilise un fichier `approved` comme référence attendue. 
-Tant que votre contenu est différent de ce fichier, un fichier `received` est généré pour pouvoir comparer le résultat avec celui attendu. 
-Si le fichier `received` correspond à ce que vous voulez, il vous suffit de le renommer ou de copier son contenu dans le fichier `approved` pour valider la nouvelle référence.
+`Approvals` utilise un fichier `.approved` comme référence attendue. 
+Tant que votre contenu est différent de ce fichier, un fichier `.received` est généré ce qui vous permet de comparer le résultat obtenu avec celui attendu. 
+Si le fichier `.received` correspond à ce que vous voulez, il vous suffit de le renommer ou de copier son contenu dans le fichier `.approved` pour valider la nouvelle référence.
 
 
 ==== Méthode de validation
 
 Si vous ne souhaitez pas intégrer https://approvaltests.com/[Approvals],
-vous pouvez rapidement écrire une méthode qui fait l'équivalent et qui est suffisante pour nos besoins.
+vous pouvez écrire une méthode qui fait l'équivalent assez rapidement et ce sera suffisant pour nos besoins.
 
-Vous trouverez ci-dessous l'algorithme d'une méthode de validation à appeler à la fin de vos tests:
+Vous trouverez ci-dessous l'algorithme, à adapter selon votre langage, et qui permet de faire la validation du contenu par rapport à un fichier de référence.
+Il faudra appeler cette méthode à la fin de chacun de vos tests.
 
 [source, python]
 ----
@@ -192,10 +194,10 @@ def verifier(nom_fichier, contenu_reçu):
 
 ==== Script bash et Git
 
-Vous pouvez vous contenter de laisser Git gérer les modifications des documents.
+Vous pouvez vous contenter de laisser Git vérifier les modifications dans vos documents.
 Nous fournissons un script `checkDocInFolder.sh` dans le dossier `scripts`
-qui appelle des commandes Git pour vérifier si les fichiers du répertoire passé en paramètre ont changé. 
-Si c'est las cas, chaque fichier modifié est considéré comme un test en échec.
+qui appelle des commandes Git pour détecter les fichiers modifiés dans le répertoire indiqué. 
+Ces fichiers, générés depuis vos tests, et qui ont un contenu qui a changé, sont considérés comme des tests en échec.
 
 Pour valider un fichier et en faire la nouvelle référence, il vous suffit de l'ajouter dans les fichiers `staged` avec la commande `git add [filename]`.
 
@@ -210,32 +212,30 @@ git status -s --no-renames [DOSSIER]
 ----
 
 
-
 == {doc_as_test}
 
 ====
-Nous allons vous guider à travers un cheminement basé sur le https://github.com/sfauvel/Parrot-Refactoring-Kata[kata de refactoring Parrot].
-Vous pouvez tout aussi bien utiliser un de vos projets et adaptez les étapes à votre contexte.
-L'important est d'expérimenter l'approche et de se faire une idée de l'utilisation.
+Nous allons vous guider à travers une suite d'étape en se basant sur le https://github.com/sfauvel/Parrot-Refactoring-Kata[kata de refactoring Parrot].
+Vous pouvez tout aussi bien utiliser un de vos projets et adapter les étapes à votre contexte.
+L'important est d'expérimenter l'approche et de se faire une idée de son utilisation.
 ====
-
-
 
 === Démarche
 
-Une fois l'outillage mis en place, nous allons pouvoir documenter l'application.
+Une fois l'outillage mis en place, nous allons pouvoir *documenter l'application*.
 Nous vous indiquons une suite d'étapes à suivre à titre d'exemple. 
 N'hésitez pas à explorer d'autres pistes si vous en avez envie.
 
-. Pensez avant tout que vous produisez de la documentation. 
-Elle doit-être lisibile, compréhensible et contenir toutes les informations nécessaires pour valider que cela fonctionne ?
-. Voyez chaque test comme l'écriture d'un chapitre et pas seulement comme la validation d'un cas isolé.
-Vous pouvez regroupez dans un seul test des cas que vous auriez habituellement séparés.
-. N'oubliez pas que vous n'êtes pas en train de faire du TDD.
-Ne vous laissez pas restreindre par lappplication de cette démarche.
+. Pensez avant tout que *vous produisez de la documentation*. 
+Elle doit-être lisibile, compréhensible et contenir toutes les informations nécessaires pour valider me fonctionnement de votre application.
+. Voyez *chaque test comme l'écriture d'un chapitre* et pas seulement comme la validation d'un cas isolé.
+Vous pouvez regrouper, dans un seul test, plusieurs cas que vous auriez habituellement séparés.
+. N'oubliez pas que *vous n'êtes pas en train de faire du TDD*.
+Ne vous laissez pas restreindre par l'appplication strict de l'approche TDD.
 . Vous n'êtes pas obligé d'approuver le document systématiquement avant de lancer le test.
-Vous pouvez attendre d'obtenir le résultat qui vous convient.
-. N'hésitez pas à créer de petits utilitaires pour vous aider à l'écriture en {asciidoc} ou pour représenter les concepts métier et l'état du système.
+Vous pouvez attendre d'obtenir le résultat qui vous convient visuellement avant d'en faire une référence.
+. N'hésitez pas à *créer de petits utilitaires* pour vous aider à l'écriture en {asciidoc} ou pour représenter les concepts métier et l'état du système.
+. A terme, les fichiers `.approved` sont commités avec le projet car ils servent d'assertion pour les tests.
 
 //
 // - The `area`.
@@ -278,26 +278,36 @@ Vous pouvez attendre d'obtenir le résultat qui vous convient.
 
 === Documenter le code existant
 
-. Afficher la liste des perroquets existant, si possible, en parcourant la liste par programmation.
-. Ajouter une image pour chaque perroquet (images disponibles dans le dossier `image`).
-. Faire un tableau avec la vitesse de chaque perroquet pour un jeu de valeurs d'entrée fixé et que vous indiquerez dans le document.
+====
+Nous allons documenter le code existant et mettre en évidence le comportement actuel.
+====
 
-. Pour le perroquet `Norwegian Blue`, afficher sa vitesse en fonction du voltage (par pas de 0.1) 
+. Afficher la liste des perroquets existant, si possible, en parcourant cette liste par programmation.
+. Ajouter une image pour chaque perroquet (images disponibles dans le dossier `image`).
+. Faire un tableau avec la vitesse de chaque perroquet à l'initialisation. 
+Utiliser les mêmes paramètres pour chaque perroquet et indiquez ces valeurs dans le document.
+. Pour le perroquet `Norwegian Blue`, afficher sa vitesse en fonction du voltage par pas de 0.1. 
 . Transformer ce tableau pour l'afficher en ligne (voltage sur la première ligne et vitesse sur la seconde).
 
 === Créer de nouvelles fonctionnalités
 
-Nous allons modéliser une `zone` dans laquelle les perroquets pourront voyager. 
-Dans cette `zone`, il y aura à différents endroits des `sources d'énérgie` qui auront une pissance comprise entre 0 et 2.
-Le perroquet aura également un emplacement dans cette `zone`.
-Le perroquet pourra se déplacer dans les différentes direction sans pouvoir sortir de la `zone`.
+====
+Nous allons utiliser l'approche lors de la mise en place de nouvelles fonctionnalités.
+====
+
+Nous voulons modéliser une `zone` dans laquelle les perroquets peut voyager. 
+Des `sources d'énergie` sont placées à différents endroits de cette `zone`.
+Elles ont une puissance comprise entre 0 et 2. +
+Le perroquet est placé quelque part dans cette `zone`.
+Il peut se déplacer dans les différentes directions sans pouvoir sortir de la `zone`.
 A chaque mouvement, son voltage diminue de 0,1. 
-Lorsqu'il passe sur une source d'énergie, il augmente son voltage de la totalité de la source d'énergie et celle çi disparait. 
+Lorsqu'il passe sur une source d'énergie, il augmente son voltage de la puissance de le source d'énergie et celle çi disparait. 
 
 . Affichez une table qui va représenter la `zone`.
-. Montrez les sources d'énergie et leur puissance.
-. Affichez l'emplacement du perroquet
-. Documentez la fonction de déplacement et l'évolution du voltage du perroquet.
+. Indiquee les sources d'énergie et leur puissance.
+. Localisez l'emplacement du perroquet.
+. Documentez la fonction de déplacement.
+. Mettez en évidence l'évolution du voltage du perroquet lors de ces déplacements.
 . Montrez ce qu'il se passe lorsqu'il passe sur une source d'énergie.
 
 
@@ -353,10 +363,10 @@ Lorsqu'il passe sur une source d'énergie, il augmente son voltage de la totalit
 [%collapsible]
 .Autres exercices
 ====
-. Ajoutez un nouveau type de perroquet
-. Refactorer le code de production une fois couvert par vos tests
+. Ajoutez un nouveau type de perroquet.
+. Refactorer le code de production une fois couvert par vos tests.
 . Calculez le temps mis par le perroquet pendant son trajet.
-. Créez un document présentant le fonctionnement général à travers un ou deux cas et faites des liens vers des pages contenant le détail complet des comportements.
+. Créez un document présentant le fonctionnement général à travers un ou deux cas et faites des liens vers d'autres pages contenant le détail complet des comportements.
 . Créez un rapport JSON de l'état du système.
 . Écrivez un algorithme qui déplace le perroquet pour qu'il consomme toutes les sources d'énergie.
 ====
