@@ -22,7 +22,7 @@ endif::[]
 = Doc as Test workshop
 
 
-image:qr_code_workshop.svg[link="qr_code_workshop.{page_extension}", width=100px]
+image:qr_code_workshop_fr.svg[link="qr_code_workshop.{page_extension}", width=100px]
 
 == Introduction
 
