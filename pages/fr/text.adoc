@@ -1,1 +1,1 @@
-Text from another file
+Ce texte provient d'un autre fichier.

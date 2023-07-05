@@ -9,28 +9,32 @@ endif::[]
 
 = Asciidoc
 
-You can see the source code used to display this page here link:asciidoc_source.{page_extension}[Asciidoc source]
+Vous pouvez voir le code source utilisé pour afficher cette page à l'adresse suivante: link:asciidoc_source.{page_extension}[Asciidoc source]
 
-We use the `asciidoc` format to write our documentation.
+Nous utilisons le format `asciidoc` pour écrirte notre documentation.
 
-This section helps you to familiarize with this format. We explain some useful syntax in our context.
+Cette section permet de vous familiariser avec ce format.
+Elle explique les principales syntaxes nécessaires dans notre contexts.
 
-If you want to go further, you can see: 
+Si vous voulez allez plus loin, vous pouvez consulter les documenations suivantes : 
 https://docs.asciidoctor.org/asciidoctor/latest/[]
 
 https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[]
 
 
-You can write in *bold* or _italic_.
+Vous pouvez écrire en *gras* ou en _italique_.
 
 ---
 
-* Create
-* a
-* checklist
+* Faire
+* des
+* listes
+* à
+* puces
 
 ---
 
+.Exemple de tableau avec en-tête
 [%autowidth]
 |====
 | Table | Header
@@ -41,18 +45,22 @@ You can write in *bold* or _italic_.
 
 ---
 
+Vous pouvez inclure d'autre fichiers.
+
 include::text.adoc[]
 
 ---
 
-Include special characters: &#x21E6; &#x21E7; &#x21E8; &#x21E9; 
+On peut afficher des caractères spéciaux: &#x21E6; &#x21E7; &#x21E8; &#x21E9; 
 
 ---
 
+.Image
 image:asciidoctor-logo.svg[width=100px]
 
 ---
 
+.Code source
 [source, java]
 ----
 /**
@@ -68,6 +76,7 @@ public class OperationsTest {
 
 ___
 
+.Example d'inclusion de SVG
 ++++
 <svg width=300 height=100  style="background-color:#b8d6ea">
     <rect x="40" y="10" width="40" height="40" fill="green"></rect>

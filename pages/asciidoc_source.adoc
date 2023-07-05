@@ -12,6 +12,6 @@ endif::[]
 You can see the rendering of the code below on this page link:asciidoc.{page_extension}[]
 
 .Asciidoc source code
-----
+------
 include::asciidoc.adoc[]
-----
+------
